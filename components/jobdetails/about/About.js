@@ -6,7 +6,7 @@ import styles from './about.style'
 const About = ({ info }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.headText}>About the job:</Text>
+      <Text style={styles.headText}>상세 직무 소개:</Text>
 
       <View style={styles.contentBox}>
         <Text style={{
