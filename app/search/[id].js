@@ -10,6 +10,13 @@ import NearbyJobCard from '../../components/common/cards/nearby/NearbyJobCard'
 import { COLORS, icons, SIZES } from '../../constants'
 import styles from '../../styles/search'
 
+// 영어 검색어를 한글로 바꿔줄 매핑 객체 추가
+const titleMap = {
+    "Full-time": "정규직",
+    "Part-time": "파트타임/알바",
+    "Contractor": "계약직/프리랜서",
+};
+
 const JobSearch = () => {
     const params = useLocalSearchParams();
     const router = useRouter()
@@ -91,14 +98,16 @@ const JobSearch = () => {
                 ListHeaderComponent={() => (
                     <>
                         <View style={styles.container}>
-                            <Text style={styles.searchTitle}>{params.id}</Text>
-                            <Text style={styles.noOfSearchedJobs}>Job Opportunities</Text>
+                            <Text style={styles.searchTitle}>
+                                {titleMap[params.id] || params.id}
+                            </Text>
+                            <Text style={styles.noOfSearchedJobs}>채용 공고</Text>
                         </View>
                         <View style={styles.loaderContainer}>
                             {searchLoader ? (
                                 <ActivityIndicator size='large' color={COLORS.primary} />
                             ) : searchError && (
-                                <Text>Oops something went wrong</Text>
+                                <Text>오류가 발생했습니다</Text>
                             )}
                         </View>
                     </>

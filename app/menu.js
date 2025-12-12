@@ -6,7 +6,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, icons, SIZES } from '../constants';
 import { ScreenHeaderBtn } from '../components';
 
-const jobTypes = ["Full-time", "Part-time", "Contractor"];
+// 1. 한글 이름과 영어 검색어(code)를 분리해서 정의
+const jobTypes = [
+    { name: "정규직", code: "Full-time" },
+    { name: "파트타임/알바", code: "Part-time" },
+    { name: "계약직/프리랜서", code: "Contractor" }
+];
 
 const Menu = () => {
   const router = useRouter();
@@ -28,10 +33,9 @@ const Menu = () => {
         }}
       />
 
-      {/* 전체를 감싸는 View에 justifyContent: 'space-between'을 주어 위/아래로 배치 */}
       <View style={{ flex: 1, padding: SIZES.medium, justifyContent: 'space-between' }}>
         
-        {/* 1. 채용 형태 버튼 */}
+        {/* 1. 채용 형태 버튼 리스트 */}
         <View>
           <Text style={{ fontSize: SIZES.xLarge, fontWeight: 'bold', color: COLORS.primary, marginBottom: 20 }}>
             채용 형태 선택
@@ -40,7 +44,7 @@ const Menu = () => {
           <View style={{ gap: 15 }}>
               {jobTypes.map((item) => (
                   <TouchableOpacity 
-                      key={item}
+                      key={item.code} // 고유 키는 영어 코드로 사용
                       style={{ 
                           padding: 20, 
                           backgroundColor: '#FFF', 
@@ -54,10 +58,12 @@ const Menu = () => {
                           shadowRadius: 3.84,
                           elevation: 5,
                       }}
-                      onPress={() => router.push(`/search/${item}`)}
+                      // 👇 2. 누르면 영어 코드(Full-time 등)로 검색
+                      onPress={() => router.push(`/search/${item.code}`)}
                   >
+                      {/* 👇 3. 화면에는 한글 이름(정규직 등) 표시 */}
                       <Text style={{ fontSize: SIZES.medium, fontWeight: 'bold', color: '#444262' }}>
-                          {item} Jobs
+                          {item.name}
                       </Text>
                       <Text style={{ fontSize: SIZES.large, color: '#C1C0C8' }}>→</Text>
                   </TouchableOpacity>
@@ -65,7 +71,7 @@ const Menu = () => {
           </View>
         </View>
 
-        {/* 2. 아래쪽: 앱 정보 */}
+        {/* 2. 하단 앱 정보 */}
         <View style={{ alignItems: 'center', paddingBottom: 20 }}>
             <View style={{ width: 50, height: 2, backgroundColor: '#EFEFEF', marginBottom: 20 }} />
             
