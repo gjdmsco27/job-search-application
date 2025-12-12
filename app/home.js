@@ -30,9 +30,7 @@ export default function Home() {
                 >
                     <Welcome/>
                     <Popularjobs/>
-                    
-                    {/* <Popularjobs/>
-                    <Nearbyjobs/> */}
+                    <Nearbyjobs/>
                 </View>
             </ScrollView>
         </SafeAreaView>
