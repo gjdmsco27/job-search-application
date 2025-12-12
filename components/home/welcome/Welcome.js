@@ -20,9 +20,19 @@ const Welcome = ({searchTerm, setSearchTerm, handleClick}) => {
     const [activeJobType, setActiveJobType] = useState("Full-time")
     return (
         <View>
-            <View style = {styles.container}>
-                <Text style = {styles.userName}> Hello 허은채 </Text>
-                <Text style = {styles.welcomeMessage}>Find your Job</Text>
+            <View style={styles.container}>
+                {/* 1. 이름 옆에 이모지 추가 */}
+                <Text style={styles.userName}>안녕하세요 허은채님 👋🏻</Text>
+                
+                {/* 2. 핵심 단어 색상 강조 */}
+                <Text style={styles.welcomeMessage}>
+                    당신의 <Text style={{ color: '#2563EB', fontWeight: 'bold' }}>최고의</Text> 직장을 찾아보세요❗💭
+                </Text>
+
+                {/* 3. 부제목 추가 */}
+                <Text style={{ marginTop: 5, color: '#83829A', fontSize: 14 }}>
+                    지금 바로 수천 개의 새로운 공고를 탐색해보세요.
+                </Text>
             </View>
             <View style = {styles.searchContainer}>
                 <View style = {styles.searchWrapper}>
@@ -31,6 +41,7 @@ const Welcome = ({searchTerm, setSearchTerm, handleClick}) => {
                         value = {searchTerm}
                         onChangeText = {(text) => setSearchTerm(text)}
                         placeholder="어떤 직업을 원하시나요?"
+                        placeholderTextColor='#ADB5BD'
                     />
                 </View>
                 <TouchableOpacity style = {styles.searchBtn} onPress = {handleClick}>
