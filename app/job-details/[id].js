@@ -1,6 +1,6 @@
-import {Stack, useRouter, useSearchParams} from "expo-router"
+import {Stack, useRouter, useLocalSearchParams} from "expo-router"
 import { useCallback, useState } from "react"
-import {View, Text, ScrollView, ActivityIndicator, RefreshControl} from "react-native"
+import {View, Text, ScrollView, ActivityIndicator, RefreshControl, Share} from "react-native"
 import {SafeAreaView} from "react-native-safe-area-context"
 
 import {Company, JobAbout, JobFooter, JobTabs, ScreenHeaderBtn, Specifics} from "../../components"
@@ -9,7 +9,7 @@ import useFetch from "../../hook/useFetch"
 const tabs = ["About", "Qualifications", "Responsibilities"];
 
 const JobDetails = () => {
-    const params = useSearchParams()
+    const params = useLocalSearchParams() // 버전 차이 발생
     const router = useRouter()
     console.log(params.id)
     const {data, isLoading, error, refetch} = useFetch("job-details", {
@@ -58,16 +58,24 @@ const JobDetails = () => {
                     headerStyle: {backgroundColor: COLORS.lightWhite},
                     headerShadowVisible: false,
                     headerBackVisible: false,
-                    headerLeft: () => {
+                    headerLeft: () => (
                         <ScreenHeaderBtn
                             iconUrl={icons.left}
                             dimension="60%"
                             handlePress={() => router.back()}
                         />
-                    },
-                    headerRight: () => {
-                        <ScreenHeaderBtn iconUrl={icons.share} dimension='60%'/>
-                    },
+                    ),
+                    headerRight: () => (
+                        <ScreenHeaderBtn
+                            iconUrl={icons.share}
+                            dimension='60%'
+                            handlePress={() => {
+                                Share.share({
+                                    message: `채용 공고 링크 ${data[0]?.job_google_link ?? '링크 없음'}`
+                                });
+                            }}
+                        />
+                    ),
                     headerTitle: ""
                 }}
             />
@@ -80,6 +88,8 @@ const JobDetails = () => {
                         <ActivityIndicator size="large" color={COLORS.primary}/>
                     ) : error ? (
                         <Text>Something went wrong</Text>
+                    ) : data.length === 0 ? (
+                        <Text>No data available</Text>
                     ) : (
                         <View style = {{padding: SIZES.medium, paddingBottom: 100}}>
                             <Company
@@ -94,7 +104,7 @@ const JobDetails = () => {
                                 setActiveTab={setActiveTab}
                             />
 
-                            {displayTabContent}
+                            {displayTabContent()}
                         </View>
                     )}
                 </ScrollView>
