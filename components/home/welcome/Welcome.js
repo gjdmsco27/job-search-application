@@ -30,7 +30,7 @@ const Welcome = ({searchTerm, setSearchTerm, handleClick}) => {
                         style = {styles.searchInput}
                         value = {searchTerm}
                         onChangeText = {(text) => setSearchTerm(text)}
-                        placeholder="어떤 잡을 원하시나요?"
+                        placeholder="어떤 직업을 원하시나요?"
                     />
                 </View>
                 <TouchableOpacity style = {styles.searchBtn} onPress = {handleClick}>

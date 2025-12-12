@@ -41,7 +41,7 @@ const Home = () => {
                             />
                         </TouchableOpacity>
                     ),
-                    headerTitle: 'Header'
+                    headerTitle: 'Job-Search App'
                 }}
             />
             <ScrollView showsVerticalScrollIndicator = {false}>
