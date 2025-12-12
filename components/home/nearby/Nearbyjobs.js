@@ -17,13 +17,13 @@ const Nearbyjobs = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Nearby jobs</Text>
+        <Text style={styles.headerTitle}>주변 채용 공고</Text>
         <TouchableOpacity>
           <Text
             style={styles.headerBtn}
             onPress={() => router.push('/search/UI UX Designer')}
           >
-            Show all
+            모두 보기
           </Text>
         </TouchableOpacity>
       </View>

@@ -23,13 +23,13 @@ const Popularjobs = () => {
     return (
         <View style = {styles.container}>
             <View style = {styles.header}>
-                <Text style = {styles.headerTitle}> Popular jobs </Text>
+                <Text style = {styles.headerTitle}> 인기 채용 공고 </Text>
                 <TouchableOpacity>
                     <Text
                         style = {styles.headerBtn}
                         onPress={() => router.push('/search/React developer')}
                     >
-                        Show all
+                        모두 보기
                     </Text>
                 </TouchableOpacity>
             </View>
