@@ -19,7 +19,12 @@ const Nearbyjobs = () => {
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Nearby jobs</Text>
         <TouchableOpacity>
-          <Text style={styles.headerBtn}>Show all</Text>
+          <Text
+            style={styles.headerBtn}
+            onPress={() => router.push('/search/UI UX Designer')}
+          >
+            Show all
+          </Text>
         </TouchableOpacity>
       </View>
 
