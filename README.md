@@ -65,5 +65,5 @@ Expo Router를 기반으로 파일 시스템 라우팅을 구현하였으며, �
    ```bash
    npm install
 2. 앱 실행
-    Bash
+    ```Bash
     npx expo start
