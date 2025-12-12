@@ -15,6 +15,8 @@ const titleMap = {
     "Full-time": "정규직",
     "Part-time": "파트타임/알바",
     "Contractor": "계약직/프리랜서",
+    "Popular": "인기 채용 공고", 
+    "Nearby": "주변 채용 공고",
 };
 
 const JobSearch = () => {
