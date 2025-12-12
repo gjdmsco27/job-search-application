@@ -6,7 +6,6 @@ import {SafeAreaView} from "react-native-safe-area-context"
 import {Company, JobAbout, JobFooter, JobTabs, ScreenHeaderBtn, Specifics} from "../../components"
 import {COLORS, icons, SIZES} from "../../constants"
 import useFetch from "../../hook/useFetch"
-const tabs = ["About", "Qualifications", "Responsibilities"];
 
 const JobDetails = () => {
     const params = useLocalSearchParams() // 버전 차이 발생
@@ -16,6 +15,7 @@ const JobDetails = () => {
         job_id: params.id,
         extended_publisher_details: 'false'
     });
+    const tabs = ["소개", "자격요건", "업무내용"];
 
     const [activeTab, setActiveTab] = useState(tabs[0]);
     const [refreshing, setRefreshing] = useState(false)
@@ -28,22 +28,22 @@ const JobDetails = () => {
 
     const displayTabContent = () => {
         switch (activeTab) {
-            case "Qualifications":
+            case "자격요건":
                 return (
                     <Specifics
-                        title = 'Qualifications'
-                        points = {data[0].job_highlights?.Qualifications ?? ["N/A"]}
+                        title = '자격요건'
+                        points = {data[0].job_highlights?.Qualifications ?? ['상세 내용을 확인하세요.']}
                     />
                 )
-            case "About":
+            case "소개":
                 return (
-                    <JobAbout info={data[0].job_description ?? "No data provided"} />
+                    <JobAbout info={data[0].job_description ?? "상세 정보가 없습니다"} />
                 )
-            case "Responsibilities":
+            case "업무내용":
                 return (
                     <Specifics
-                        title='Responsibilities'
-                        points={data[0].job_highlights?.Responsibilities ?? ["N/A"]}
+                        title='업무내용'
+                        points={data[0].job_highlights?.Responsibilities ?? ['상세 업무 내용을 확인하세요.']}
                     />
                 )
             default:

@@ -17,7 +17,7 @@ const Footer = ({ url }) => {
         style={styles.applyBtn}
         onPress={() => Linking.openURL(url)}
       >
-        <Text style={styles.applyBtnText}>Apply for job</Text>
+        <Text style={styles.applyBtnText}>직업에 지원하기</Text>
       </TouchableOpacity>
     </View>
   );
