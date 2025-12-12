@@ -15,7 +15,7 @@ const Profile = () => {
         options={{
           headerStyle: { backgroundColor: COLORS.lightWhite },
           headerShadowVisible: false,
-          headerTitle: "My Profile",
+          headerTitle: "마이 페이지",
           headerLeft: () => (
             <ScreenHeaderBtn
               iconUrl={icons.left}
