@@ -1,20 +1,23 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { ActivityIndicator, FlatList, Image, TouchableOpacity, View, Text } from 'react-native'
+import { Stack, useRouter } from 'expo-router'
+import { useLocalSearchParams } from 'expo-router'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import axios from 'axios'
 
-const useFetch = (endpoint, query) => {
-    const [data, setData] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null)
+import { ScreenHeaderBtn } from '../../components'
+import NearbyJobCard from '../../components/common/cards/nearby/NearbyJobCard'
+import { COLORS, icons, SIZES } from '../../constants'
+import styles from '../../styles/search'
 
-    const options = {
-        method: 'GET',
-        url: `https://jsearch.p.rapidapi.com/${endpoint}`,
-        headers: {
-            'x-rapidapi-key': 'b3226e6555mshfc9823e78e38870p1d2d83jsnff654408bd74',
-            'x-rapidapi-host': 'jsearch.p.rapidapi.com'
-        },
-        params: { ...query },
-    };
+const JobSearch = () => {
+    const params = useLocalSearchParams();
+    const router = useRouter()
+
+    const [searchResult, setSearchResult] = useState([]);
+    const [searchLoader, setSearchLoader] = useState(false);
+    const [searchError, setSearchError] = useState(null);
+    const [page, setPage] = useState(1);
 
     const handleSearch = async () => {
         setSearchLoader(true);
@@ -23,7 +26,7 @@ const useFetch = (endpoint, query) => {
         try {
             const options = {
                 method: 'GET',
-                url: `https://jsearch.p.rapidapi.com/${endpoint}`,
+                url: `https://jsearch.p.rapidapi.com/search`,
                 headers: {
                     'x-rapidapi-key': 'b3226e6555mshfc9823e78e38870p1d2d83jsnff654408bd74',
                     'x-rapidapi-host': 'jsearch.p.rapidapi.com'
@@ -33,6 +36,7 @@ const useFetch = (endpoint, query) => {
                     page: page.toString(),
                 },
             }
+
             const response = await axios.request(options);
             setSearchResult(response.data.data);
         } catch (error) {
