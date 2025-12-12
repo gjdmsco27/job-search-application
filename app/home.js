@@ -1,5 +1,5 @@
 import {useState} from "react"
-import {Text, View, ScrollView} from 'react-native'
+import {Text, View, ScrollView, Image, TouchableOpacity} from 'react-native'
 import {SafeAreaView} from 'react-native-safe-area-context'
 import {COLORS, icons, images, SIZES} from '../constants'
 import {Stack, useRouter} from 'expo-router'
@@ -19,7 +19,23 @@ const Home = () => {
                         <ScreenHeaderBtn iconUrl = {icons.menu} dimension = '60%'/>
                     ),
                     headerRight: () => (
-                        <ScreenHeaderBtn iconUrl = {images.profile} dimension = '100%'/>
+                        <TouchableOpacity 
+                            style={{ 
+                            width: 50,
+                            height: 50,
+                            borderRadius: 0,
+                            overflow: 'hidden',
+                            borderWidth: 1,
+                            borderColor: '#F3F4F8'
+                            }}
+                            onPress={() => router.push('/profile')}
+                        >
+                            <Image 
+                            source={images.profile}
+                            resizeMode="cover"
+                            style={{ width: '100%', height: '100%' }}
+                            />
+                        </TouchableOpacity>
                     ),
                     headerTitle: 'Header'
                 }}
